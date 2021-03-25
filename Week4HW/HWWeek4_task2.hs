@@ -11,11 +11,20 @@ main = do
     print $ isPresentFunc 0 [0, -1, 2] == True
 
 isPresentRecNonPM :: Int -> [Int] -> Bool
-isPresentRecNonPM num xs = elem num xs
+isPresentRecNonPM num xs 
+ | xs == [] = False
+ | head xs == num = True
+ | otherwise = isPresentRecNonPM num (tail xs)
 
 isPresentRecPM :: Int -> [Int] -> Bool
 isPresentRecPM _ [] = False
-isPresentRecPM num xs = elem num xs
+isPresentRecPM num (x:xs)
+ | x == num = True
+ | otherwise = isPresentRecPM num xs
 
 isPresentFunc :: Int -> [Int] -> Bool
-isPresentFunc num xs = any (==num) xs
+isPresentFunc num xs = elem num xs
+
+-- HOF
+-- isPresentFunc :: Int -> [Int] -> Bool
+-- isPresentFunc num xs = any (==num) xs
